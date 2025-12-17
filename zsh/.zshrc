@@ -44,7 +44,6 @@ alias ai="cd ~/Desktop;gemini"
 alias cat="bat"
 alias top="btop"
 alias htop="btop"
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias mail="aerc"
 
 # Env vars
