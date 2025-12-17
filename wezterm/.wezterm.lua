@@ -50,7 +50,7 @@ config.macos_window_background_blur = 32
 ------------------------------------------------------------
 -- Font
 ------------------------------------------------------------
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 16
 config.line_height = 1.1
 
