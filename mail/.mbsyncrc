@@ -1,0 +1,20 @@
+IMAPAccount gmail
+Host imap.gmail.com
+User igor.mauricio.eng@gmail.com
+PassCmd "security find-generic-password -a igor.mauricio.eng@gmail.com -s gmail -w"
+TLSType IMAPS
+AuthMechs LOGIN
+
+MaildirStore local
+Inbox ~/mail/INBOX
+SubFolders Maildir++
+
+IMAPStore gmail
+Account gmail
+
+Channel primary
+Far :gmail:
+Near :local:
+Patterns INBOX "[Gmail]/Sent Mail" "[Gmail]/Trash" "[Gmail]/Spam"
+# Create Both
+# Expunge Both   # enable only after testing

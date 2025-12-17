@@ -1,0 +1,66 @@
+return {}
+-- return {
+--   "folke/flash.nvim",
+--   event = "VeryLazy",
+--   ---@type Flash.Config
+--   opts = {
+--     char = {},
+--   },
+--   config = function()
+--     require("flash").setup({
+--       keymap = {
+--         ["<CR>"] = false,
+--       },
+--       modes = {
+--         search = {
+--           enabled = false, -- disables / search integration (maps <CR>)
+--         },
+--         char = {
+--           enabled = false, -- disables f/F/t/T override (they also affect <CR>)
+--         },
+--       },
+--     })
+--   end,
+--   keys = {
+--     {
+--       "m",
+--       mode = { "n", "x", "o" },
+--       function()
+--         require("flash").jump()
+--       end,
+--       desc = "Flash",
+--     },
+--     {
+--       "M",
+--       mode = { "n", "x", "o" },
+--       function()
+--         require("flash").treesitter()
+--       end,
+--       desc = "Flash Treesitter",
+--     },
+--     {
+--       "mr",
+--       mode = "o",
+--       function()
+--         require("flash").remote()
+--       end,
+--       desc = "Remote Flash",
+--     },
+--     {
+--       "ms",
+--       mode = { "o", "x" },
+--       function()
+--         require("flash").treesitter_search()
+--       end,
+--       desc = "Treesitter Search",
+--     },
+--     {
+--       "<c-m>",
+--       mode = { "c" },
+--       function()
+--         require("flash").toggle()
+--       end,
+--       desc = "Toggle Flash Search",
+--     },
+--   },
+-- }

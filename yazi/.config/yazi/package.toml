@@ -1,0 +1,19 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "8f1d971"
+hash = "56fdabc96fc1f4d53c96eb884b02a5be"
+
+[[flavor.deps]]
+use = "956MB/vscode-dark-modern"
+rev = "cd60541"
+hash = "f970182bee3543831796629ccf078553"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:dracula"
+rev = "f6b425a"
+hash = "c5e49b9e877ca29a3622ec2e35af0b2a"
+
+[[flavor.deps]]
+use = "gosxrgxx/flexoki-dark"
+rev = "28e1977"
+hash = "9dbbb64ea20f9f1271c31951dea55c7b"
