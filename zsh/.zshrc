@@ -39,12 +39,12 @@ source $ZSH/oh-my-zsh.sh
 ## Aliases
 # alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 alias vi="nvim"
-alias vim="nvim"
 alias ai="cd ~/Desktop;gemini"
 alias cat="bat"
 alias top="btop"
 alias htop="btop"
 alias mail="aerc"
+alias files="yazi" 
 
 # Env vars
 export NVM_DIR="$(brew --prefix nvm)"
@@ -54,6 +54,8 @@ export NVM_DIR="$(brew --prefix nvm)"
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.platformio/penv/bin
 export PATH=$PATH:$HOME/.local/bin
+
+export EDITOR=nvim
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
@@ -75,3 +77,10 @@ zle -N vi-visual-yank-clipboard
 bindkey -M visual "y" vi-visual-yank-clipboard
 
 zstyle ':completion:*' menu select
+
+# Start tmux automatically on terminal launch
+if command -v tmux >/dev/null 2>&1; then
+  if [ -z "$TMUX" ]; then
+    tmux attach || exec tmux new
+  fi
+fi
