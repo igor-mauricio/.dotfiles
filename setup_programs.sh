@@ -46,7 +46,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo "=== Installing GUI apps ==="
 
 brew install --cask \
-  zen \
   iterm2 \
   obs \
   karabiner-elements \
@@ -58,6 +57,7 @@ brew install --cask \
   nikitabobko/tap/aerospace \
   discord \
   chatgpt \
+  pearcleaner \
   gimp \
   mac-mouse-fix \
   orbstack
