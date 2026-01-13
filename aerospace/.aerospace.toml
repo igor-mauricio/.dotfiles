@@ -3,7 +3,9 @@
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+'workspace 1'
+]
 # after-startup-command = [
 # 'exec-and-forget borders active_color=0xffe1e3e4 width=4.0'
 # ]
@@ -58,7 +60,7 @@ inner.horizontal = 8
 inner.vertical = 8
 outer.left = 8
 outer.bottom = 8
-outer.top = 8
+outer.top = 0
 outer.right = 8
 
 # 'main' binding mode declaration
@@ -141,6 +143,7 @@ cmd-alt-ctrl-6 = 'workspace 6'
 cmd-alt-ctrl-7 = 'workspace 7'
 cmd-alt-ctrl-8 = 'workspace 8'
 cmd-alt-ctrl-9 = 'workspace 9'
+cmd-alt-ctrl-0 = 'workspace 0'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -153,38 +156,21 @@ cmd-alt-ctrl-shift-6 = 'move-node-to-workspace 6'
 cmd-alt-ctrl-shift-7 = 'move-node-to-workspace 7'
 cmd-alt-ctrl-shift-8 = 'move-node-to-workspace 8'
 cmd-alt-ctrl-shift-9 = 'move-node-to-workspace 9'
+cmd-alt-ctrl-shift-0 = 'move-node-to-workspace 0'
 
 # app-shortcuts-“
 
 
 cmd-alt-ctrl-e = 'exec-and-forget open -a Finder.app'
 cmd-alt-ctrl-t = 'exec-and-forget open -a wezterm.app'
-cmd-alt-ctrl-b = 'exec-and-forget open -a Zen.app'
-cmd-alt-ctrl-r = 'exec-and-forget open -a Reminders.app'
-cmd-alt-ctrl-n = 'exec-and-forget open -a Obsidian.app'
-cmd-alt-ctrl-c = 'exec-and-forget open -a Visual\ Studio\ Code.app'
-# Toggle between floating-centered and tiling layout.
-## Floating-centered needs to depend on Raycast Window Management Center Command hotkey.
-## My Raycast window management Center Command hotkey is set to `ctrl + option + cmd + f2`. (`Key Code 120` = F2)
-
-# cmd-alt-ctrl-a = 'exec-and-forget open -a Google\ Gemini.app'
+cmd-alt-ctrl-b = 'exec-and-forget open -a Safari.app'
 cmd-alt-ctrl-m = 'exec-and-forget open -a Music.app'
 cmd-alt-ctrl-w = 'exec-and-forget open -a Whatsapp.app'
-# cmd-alt-ctrl-i = 'exec-and-forget open -a Instagram.app'
-
-cmd-alt-ctrl-shift-t = 'exec-and-forget open -na iTerm.app'
-cmd-alt-ctrl-shift-b = 'exec-and-forget open -na Zen.app'
-cmd-alt-ctrl-shift-n = 'exec-and-forget open -na Obsidian.app'
-cmd-alt-ctrl-shift-c = '''exec-and-forget aerospace layout floating && osascript -e 'tell application "System Events" to key code 119 using {control down, option down, command down}' || aerospace layout tiling'''
-
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+cmd-alt-ctrl-shift-t = 'exec-and-forget open -na wezterm.app'
+cmd-alt-ctrl-shift-b = 'exec-and-forget open -na Safari.app'
 cmd-alt-ctrl-tab = 'workspace-back-and-forth'
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 cmd-alt-ctrl-shift-tab = 'move-workspace-to-monitor --wrap-around next'
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#mode
-cmd-alt-ctrl-shift-semicolon = 'mode service'
+cmd-alt-ctrl-semicolon = 'mode service'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -210,11 +196,6 @@ up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
 
 # Default space
-
-# [[on-window-detected]]
-# if.app-id = "com.github.wez.wezterm"
-# if.window-title-regex-substring = 'scratch'
-# run = "layout floating"
 
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
@@ -250,21 +231,18 @@ run = ['layout floating']
 if.app-id = 'com.bitwarden.desktop'
 run = ['layout floating']
 
-# [[on-window-detected]]
-# if.app-id = 'com.microsoft.VSCode'
-# run = ['layout floating', 'move-node-to-workspace 1']
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-id = 'com.googlecode.iterm2'
+if.app-id = 'com.github.wez.wezterm'
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari.WebApp.F2D52435-2C1F-47DE-ADA6-A1EB27D73838'
 run = ['move-node-to-workspace 1']
 
-[[on-window-detected]]
-if.app-id = 'com.valvesoftware.steam'
-run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
@@ -293,6 +271,10 @@ run = ['move-node-to-workspace 4']
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
 run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.valvesoftware.steam'
+run = ['move-node-to-workspace 6']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Is'
