@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 
 local config = {}
 
@@ -19,7 +20,7 @@ config.foreground_text_hsb = {
 config.front_end = "WebGpu" -- best on macOS
 config.webgpu_power_preference = "HighPerformance"
 config.animation_fps = 60
-config.max_fps = 120
+config.max_fps = 60
 
 ------------------------------------------------------------
 -- Window appearance
@@ -46,18 +47,20 @@ config.adjust_window_size_when_changing_font_size = false
 
 -- True transparency
 config.window_background_opacity = 0.70
-config.macos_window_background_blur = 32
+-- config.macos_window_background_blur = 42
 ------------------------------------------------------------
 -- Font
 ------------------------------------------------------------
 config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font_size = 16
+config.font_size = 17
 config.line_height = 1.1
+config.send_composed_key_when_left_alt_is_pressed = true
+config.send_composed_key_when_right_alt_is_pressed = true
 
 ------------------------------------------------------------
 -- Colors
 ------------------------------------------------------------
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Monokai Soda"
 --
 -- local config = {}
 config.bold_brightens_ansi_colors = true
@@ -86,13 +89,171 @@ config.selection_word_boundary = " \t\n{}[]()\"'`"
 ------------------------------------------------------------
 -- Copy mode (vim-like)
 ------------------------------------------------------------
+local tmux_prefix = { key = " ", mods = "CTRL" }
 config.keys = {
+	-- Tmux prefix
 	{
 		key = " ",
 		mods = "CTRL",
 		action = wezterm.action.SendKey({ key = " ", mods = "CTRL" }),
 	},
+	-- Close tmux pane/window
+	{
+		key = "w",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = "x" }), -- kill-window
+		}),
+	},
+	-- Create tmux window
+	{
+		key = "t",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = "c" }), -- new-window
+		}),
+	},
+	-- Enter tmux search mode
+	{
+		key = "f",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = "[" }), -- copy-mode
+		}),
+	},
+	-- Manage tmux windows
+	{
+		key = "w",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }), -- prefix (Ctrl-Space)
+			act.SendKey({ key = "w" }), -- choose-tree / window list
+		}),
+	},
+	-- Zoom tmux window
+	{
+		key = "z",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }), -- prefix (Ctrl-Space)
+			act.SendKey({ key = "z" }), -- choose-tree / window list
+		}),
+	},
+	-- Cmd+h/j/k/l → tmux select-pane (prefix + h/j/k/l)
+	{
+		key = "h",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey({ key = "h", mods = "CTRL" }),
+		}),
+	},
+	{
+		key = "j",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey({ key = "j", mods = "CTRL" }),
+		}),
+	},
+	{
+		key = "k",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey({ key = "k", mods = "CTRL" }),
+		}),
+	},
+	{
+		key = "l",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey({ key = "l", mods = "CTRL" }),
+		}),
+	},
+
+	-- Cmd+Shift+h/j/k/l → tmux swap-pane (prefix + H/J/K/L)
+	{
+		key = "h",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey({ key = "H" }),
+		}),
+	},
+	{
+		key = "j",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey({ key = "J" }),
+		}),
+	},
+	{
+		key = "k",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey({ key = "K" }),
+		}),
+	},
+	{
+		key = "l",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey({ key = "L" }),
+		}),
+	},
+	{
+		key = "LeftArrow",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey({ key = "LeftArrow" }),
+		}),
+	},
+
+	-- Cmd + Right → tmux prefix + Right
+	{
+		key = "RightArrow",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey({ key = "RightArrow" }),
+		}),
+	},
+	{
+		key = "LeftArrow",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey({ key = "LeftArrow", mods = "SHIFT" }),
+		}),
+	},
+
+	-- Cmd + Right → tmux prefix + Right
+	{
+		key = "RightArrow",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey({ key = "RightArrow", mods = "SHIFT" }),
+		}),
+	},
 }
+-- Switch tmux window
+for i = 1, 9 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = tostring(i) }), -- window number
+		}),
+	})
+end
+
 -- Inline images
 config.enable_kitty_graphics = true
 
