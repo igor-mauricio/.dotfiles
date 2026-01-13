@@ -1,3 +1,5 @@
+## igor.mauricio.eng@gmail.com
+
 IMAPAccount gmail
 Host imap.gmail.com
 User igor.mauricio.eng@gmail.com
@@ -17,4 +19,27 @@ Far :gmail:
 Near :local:
 Patterns INBOX "[Gmail]/Sent Mail" "[Gmail]/Trash" "[Gmail]/Spam"
 # Create Both
+# Expunge Both   # enable only after testing
+
+
+## contato@igormauricio.com
+IMAPAccount hostinger
+Host imap.hostinger.com
+User contato@igormauricio.com
+PassCmd "security find-generic-password -a contato@igormauricio.com -s hostinger -w"
+TLSType IMAPS
+AuthMechs LOGIN
+
+MaildirStore local-hostinger
+Inbox ~/mail/hostinger/INBOX
+SubFolders Maildir++
+
+IMAPStore hostinger
+Account hostinger
+
+Channel hostinger-primary
+Far :hostinger:
+Near :local-hostinger:
+Patterns INBOX Sent Drafts Trash Junk
+Create Near
 # Expunge Both   # enable only after testing
