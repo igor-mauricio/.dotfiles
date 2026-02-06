@@ -1,5 +1,4 @@
 return {
-
   {
     "jvgrootveld/telescope-zoxide",
     dependencies = {

@@ -4,6 +4,7 @@ vim.keymap.set({ "n", "x" }, "q", "<Nop>")
 for i = 1, 9 do
   vim.keymap.set("n", "<leader>" .. i, "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", { desc = "Go to buffer " .. i })
 end
+
 vim.keymap.set("n", "<leader>z", require("telescope").extensions.zoxide.list)
 vim.keymap.set({ "n", "i" }, "<C-d>", "<C-d>zz")
 vim.keymap.set({ "n", "i" }, "<C-u>", "<C-u>zz")

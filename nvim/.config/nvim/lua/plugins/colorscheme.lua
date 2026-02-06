@@ -1,26 +1,7 @@
 return {
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {
-  --     style = "night",
-  --     transparent = true,
-  --     styles = {
-  --       floats = "transparent",
-  --       sidebars = "transparent",
-  --     },
-  --     on_colors = function(colors)
-  --       colors.bg_statusline = colors.none -- To check if its working try something like "#ff00ff" instead of colors.none
-  --     end,
-  --   },
-  --   config = function(_, opts)
-  --     require("tokyonight").setup(opts)
-  --     -- vim.cmd.colorscheme("tokyonight-moon")
-  --   end,
-  -- },
   {
     "loctvl842/monokai-pro.nvim",
+    commit = "8d43e7746754c2dc6e8b797cbcdd361b46086675",
     config = function()
       require("monokai-pro").setup({
         transparent_background = true,
@@ -49,19 +30,33 @@ return {
           "nvim-tree",
           "neo-tree",
           "bufferline",
+          "lualine",
         },
         plugins = {
           bufferline = { underline_selected = false, underline_visible = false },
           indent_blankline = { context_highlight = "default", context_start_underline = false },
         },
       })
-
-      -- Apply colorscheme first
       vim.cmd.colorscheme("monokai-pro")
-
       vim.schedule(function()
         require("lualine").setup({})
       end)
+    end,
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      local theme = require("lualine.themes.monokai-pro")
+      local transparent_sections = { "b", "c", "x", "y", "z" }
+      for _, mode in pairs(theme) do
+        for _, section in ipairs(transparent_sections) do
+          if mode[section] then
+            mode[section].bg = "none"
+          end
+        end
+      end
+      opts.options.theme = theme
+      return opts
     end,
   },
 }

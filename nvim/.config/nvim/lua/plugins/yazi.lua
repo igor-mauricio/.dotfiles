@@ -6,7 +6,6 @@ return {
     { "nvim-lua/plenary.nvim", lazy = true },
   },
   keys = {
-    -- 👇 in this section, choose your own keymappings!
     {
       "-",
       mode = { "n", "v" },
@@ -14,7 +13,6 @@ return {
       desc = "Open yazi at the current file",
     },
     {
-      -- Open in the current working directory
       "_",
       "<cmd>Yazi cwd<cr>",
       desc = "Open the file manager in nvim's working directory",
@@ -39,11 +37,7 @@ return {
       end,
     },
   },
-  -- 👇 if you use `open_for_directories=true`, this is recommended
   init = function()
-    -- mark netrw as loaded so it's not loaded at all.
-    --
-    -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
     vim.g.loaded_netrwPlugin = 1
   end,
 }

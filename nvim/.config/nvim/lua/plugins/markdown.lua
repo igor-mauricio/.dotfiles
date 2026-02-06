@@ -16,7 +16,6 @@ return {
       { "<leader>ot", "<cmd>ObsidianToday<cr>", desc = "Today note", mode = "n" },
       { "<leader>oy", "<cmd>ObsidianYesterday<cr>", desc = "Yesterday note", mode = "n" },
       { "<leader>od", "<cmd>ObsidianDailies<cr>", desc = "Daily notes", mode = "n" },
-      { "<leader>op", "<cmd>ObsidianPasteImg<cr>", desc = "Paste imate from clipboard under cursor", mode = "n" },
       {
         "<leader>oe",
         "<cmd>ObsidianExtractNote<cr>",
@@ -97,15 +96,89 @@ return {
           [">"] = { char = "", hl_group = "ObsidianRightArrow" },
           ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
           ["!"] = { char = "", hl_group = "ObsidianImportant" },
-          -- Replace the above with this if you don't have a patched font:
-          -- [" "] = { char = "☐", hl_group = "ObsidianTodo" },
-          -- ["x"] = { char = "✔", hl_group = "ObsidianDone" },
-
-          -- You can also add more custom ones...
         },
-        -- Use bullet marks for non-checkbox lists.
         bullets = { char = "•", hl_group = "ObsidianBullet" },
         external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+      },
+    },
+  },
+  {
+    "3rd/image.nvim",
+    event = "VeryLazy",
+    opts = {
+      backend = "kitty", -- or "wezterm"
+      processor = "magick_cli",
+      integrations = {
+        markdown = {
+          enabled = true,
+          only_render_image_at_cursor = true,
+          clear_in_insert_mode = true,
+        },
+      },
+      max_width = 80,
+      max_height = 20,
+      window_overlap_clear_enabled = true,
+    },
+  },
+  {
+    "3rd/diagram.nvim",
+    dependencies = {
+      "3rd/image.nvim",
+    },
+    opts = {
+      -- Disable automatic rendering for manual-only workflow
+      events = {
+        render_buffer = {}, -- Empty = no automatic rendering
+        clear_buffer = { "BufLeave" },
+      },
+
+      renderer_options = {
+        mermaid = {
+          background = "transparent",
+          theme = "dark",
+          scale = 10,
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>ov",
+        function()
+          -- 1. Clear all rendered images (image.nvim API)
+          local ok_image, image = pcall(require, "image")
+          if ok_image and image.clear then
+            image.clear()
+          end
+
+          -- 2. Small delay to let tmux/wezterm repaint
+          -- vim.cmd("vsplit")
+          vim.defer_fn(function()
+            require("diagram").show_diagram_hover()
+          end, 30)
+        end,
+        mode = "n",
+        ft = { "markdown", "norg" },
+        desc = "Show diagram (force redraw)",
+      },
+    },
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      default = {
+        dir_path = "assets/imgs",
+        relative_to_current_file = true,
+        prompt_for_file_name = false,
+        use_absolute_path = false,
+      },
+    },
+    keys = {
+      {
+        "<leader>op",
+        "<cmd>PasteImage<cr>",
+        desc = "Paste image (img-clip)",
+        mode = "n",
       },
     },
   },
