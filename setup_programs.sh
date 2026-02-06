@@ -37,6 +37,8 @@ brew install \
   rg \
   eza \
   7z \
+  imagemagick \
+  brew install superseedr \
   nvm
 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
@@ -47,13 +49,10 @@ echo "=== Installing GUI apps ==="
 
 brew install --cask \
   iterm2 \
-  obs \
   karabiner-elements \
-  qbittorrent \
   maccy \
   betterdisplay \
   zerotier-one \
-  visual-studio-code \
   nikitabobko/tap/aerospace \
   discord \
   chatgpt \
@@ -69,6 +68,6 @@ brew install --cask kde-mac/kde/kdeconnect
 curl -fsSL -o get-platformio.py https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py
 python3 get-platformio.py
 
-echo "=== Installing tdf ==="
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo install --git https://github.com/itsjunetime/tdf.git
+# install cleanshot x
+# install pearcleaner
+# install whatsapp
