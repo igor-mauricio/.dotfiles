@@ -10,59 +10,31 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # oh-my-zsh plugins
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
-# eza settings
-show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
-
-## Fzf settings
-export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview "eval 'echo ${}'"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
-  esac
-}
 source $ZSH/oh-my-zsh.sh
 
 ## Aliases
-# alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 alias vi="nvim"
-alias ai="cd ~/Desktop;gemini"
+alias vim="nvim"
 alias cat="bat"
 alias top="btop"
 alias htop="btop"
 alias mail="aerc"
-alias files="yazi" 
+alias torrent="superseedr"
+alias torrentsearch="magnetfinder"
 
 # Env vars
+export EDITOR=nvim
 export NVM_DIR="$(brew --prefix nvm)"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-# Path
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.platformio/penv/bin
 export PATH=$PATH:$HOME/.local/bin
-
-export EDITOR=nvim
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
 
 ## Vim mode
 bindkey -v
-
 function vi-yank-clipboard {
   zle vi-yank                   # perform the normal yank
   print -rn -- "$CUTBUFFER" | pbcopy   # copy last yank to macOS clipboard
@@ -78,9 +50,37 @@ bindkey -M visual "y" vi-visual-yank-clipboard
 
 zstyle ':completion:*' menu select
 
-# Start tmux automatically on terminal launch
-if command -v tmux >/dev/null 2>&1; then
-  if [ -z "$TMUX" ]; then
-    tmux attach || exec tmux new
+# tmux command to resume session or create one if it doesn't exist
+tmux() {
+  if command -v tmux >/dev/null 2>&1; then
+    if [ -z "$TMUX" ]; then
+      command tmux attach || command tmux new
+    else
+      command tmux "$@"
+    fi
   fi
-fi
+}
+
+## Fzf settings
+export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+
+## Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd) fzf --preview 'ls -la {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo ${}'"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
+  esac
+}
+
