@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Only rename if we're inside tmux
+if [ -n "$TMUX" ]; then
+  # Save current window name
+  OLD_NAME=$(tmux display-message -p '#W')
+
+  # Set window name
+  tmux rename-window notes
+fi
+
+nvim ~/vault
+STATUS=$?
+
+# Restore previous window name
+if [ -n "$TMUX" ]; then
+  tmux rename-window "$OLD_NAME"
+fi
+
+exit $STATUS
