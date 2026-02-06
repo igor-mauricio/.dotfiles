@@ -1,23 +1,19 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
-
 local config = {}
-
--- Use config builder if available (newer WezTerm versions)
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
-
 config.foreground_text_hsb = {
-	hue = 1.00, -- 1.0 = no change
-	saturation = 1.1, -- 30% more saturation
-	brightness = 1.1, -- 10% brighter
+	hue = 1.00,
+	saturation = 1.1,
+	brightness = 1.1,
 }
 
 ------------------------------------------------------------
 -- Performance
 ------------------------------------------------------------
-config.front_end = "WebGpu" -- best on macOS
+config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 config.animation_fps = 60
 config.max_fps = 60
@@ -32,7 +28,6 @@ config.window_padding = {
 	top = 12,
 	bottom = 0,
 }
-
 config.window_frame = {
 	border_left_width = "2px",
 	border_right_width = "2px",
@@ -44,10 +39,9 @@ config.window_frame = {
 	border_top_color = "#3E3E3E",
 }
 config.adjust_window_size_when_changing_font_size = false
-
--- True transparency
 config.window_background_opacity = 0.70
 -- config.macos_window_background_blur = 42
+
 ------------------------------------------------------------
 -- Font
 ------------------------------------------------------------
@@ -56,13 +50,12 @@ config.font_size = 17
 config.line_height = 1.1
 config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
+config.enable_kitty_graphics = true
 
 ------------------------------------------------------------
 -- Colors
 ------------------------------------------------------------
 config.color_scheme = "Monokai Soda"
---
--- local config = {}
 config.bold_brightens_ansi_colors = true
 config.colors = {
 	background = "#000000",
@@ -86,9 +79,11 @@ config.scrollback_lines = 10000
 ------------------------------------------------------------
 config.enable_wayland = false
 config.selection_word_boundary = " \t\n{}[]()\"'`"
+
 ------------------------------------------------------------
 -- Copy mode (vim-like)
 ------------------------------------------------------------
+---
 local tmux_prefix = { key = " ", mods = "CTRL" }
 config.keys = {
 	-- Tmux prefix
@@ -129,7 +124,7 @@ config.keys = {
 		key = "w",
 		mods = "CMD|SHIFT",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }), -- prefix (Ctrl-Space)
+			act.SendKey(tmux_prefix), -- prefix (Ctrl-Space)
 			act.SendKey({ key = "w" }), -- choose-tree / window list
 		}),
 	},
@@ -138,7 +133,7 @@ config.keys = {
 		key = "z",
 		mods = "CMD",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }), -- prefix (Ctrl-Space)
+			act.SendKey(tmux_prefix), -- prefix (Ctrl-Space)
 			act.SendKey({ key = "z" }), -- choose-tree / window list
 		}),
 	},
@@ -177,7 +172,7 @@ config.keys = {
 		key = "h",
 		mods = "CMD|SHIFT",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "H" }),
 		}),
 	},
@@ -185,7 +180,7 @@ config.keys = {
 		key = "j",
 		mods = "CMD|SHIFT",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "J" }),
 		}),
 	},
@@ -193,7 +188,7 @@ config.keys = {
 		key = "k",
 		mods = "CMD|SHIFT",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "K" }),
 		}),
 	},
@@ -201,7 +196,7 @@ config.keys = {
 		key = "l",
 		mods = "CMD|SHIFT",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }),
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "L" }),
 		}),
 	},
@@ -209,7 +204,7 @@ config.keys = {
 		key = "LeftArrow",
 		mods = "CMD",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "LeftArrow" }),
 		}),
 	},
@@ -219,7 +214,7 @@ config.keys = {
 		key = "RightArrow",
 		mods = "CMD",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "RightArrow" }),
 		}),
 	},
@@ -227,7 +222,7 @@ config.keys = {
 		key = "LeftArrow",
 		mods = "CMD|SHIFT",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "LeftArrow", mods = "SHIFT" }),
 		}),
 	},
@@ -237,7 +232,7 @@ config.keys = {
 		key = "RightArrow",
 		mods = "CMD|SHIFT",
 		action = act.Multiple({
-			act.SendKey({ key = " ", mods = "CTRL" }), -- tmux prefix (Ctrl-Space)
+			act.SendKey(tmux_prefix),
 			act.SendKey({ key = "RightArrow", mods = "SHIFT" }),
 		}),
 	},
@@ -252,10 +247,15 @@ for i = 1, 9 do
 			act.SendKey({ key = tostring(i) }), -- window number
 		}),
 	})
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "CTRL",
+		action = act.Multiple({
+			act.SendKey({ key = " " }),
+			act.SendKey({ key = tostring(i) }), -- window number
+		}),
+	})
 end
-
--- Inline images
-config.enable_kitty_graphics = true
 
 ------------------------------------------------------------
 -- Shell
