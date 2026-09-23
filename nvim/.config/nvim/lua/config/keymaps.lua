@@ -1,5 +1,5 @@
 vim.keymap.set({ "n", "x" }, "s", "<Nop>")
-vim.keymap.set({ "n", "x" }, "q", "<Nop>")
+-- vim.keymap.set({ "n", "x" }, "q", "<Nop>")
 
 for i = 1, 9 do
   vim.keymap.set("n", "<leader>" .. i, "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", { desc = "Go to buffer " .. i })

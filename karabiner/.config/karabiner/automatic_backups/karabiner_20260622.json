@@ -8,7 +8,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "description": "Change tab to command+control+option+shift.",
@@ -23,6 +22,25 @@
                                     }
                                 ],
                                 "to_if_alone": [{ "key_code": "tab" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change esc to command+control+option+shift.",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "modifiers": ["left_command", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
                                 "type": "basic"
                             }
                         ]

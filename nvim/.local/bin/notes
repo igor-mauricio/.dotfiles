@@ -9,7 +9,8 @@ if [ -n "$TMUX" ]; then
   tmux rename-window notes
 fi
 
-nvim ~/vault
+cd ~/vault
+nvim
 STATUS=$?
 
 # Restore previous window name

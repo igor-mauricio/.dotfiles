@@ -20,10 +20,9 @@ alias top="btop"
 alias htop="btop"
 alias mail="aerc"
 alias torrent="superseedr"
-alias torrentsearch="magnetfinder"
 
 # Env vars
-export EDITOR=nvim
+export EDITOR=zed
 export NVM_DIR="$(brew --prefix nvm)"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 export PATH=$PATH:$HOME/go/bin
@@ -65,7 +64,7 @@ tmux() {
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 
 ## Yazi
-function y() {
+function files() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
 	IFS= read -r -d '' cwd < "$tmp"
@@ -84,3 +83,6 @@ _fzf_comprun() {
   esac
 }
 
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

@@ -39,7 +39,7 @@ config.window_frame = {
 	border_top_color = "#3E3E3E",
 }
 config.adjust_window_size_when_changing_font_size = false
-config.window_background_opacity = 0.70
+-- config.window_background_opacity = 0.70
 -- config.macos_window_background_blur = 42
 
 ------------------------------------------------------------
@@ -58,7 +58,7 @@ config.enable_kitty_graphics = true
 config.color_scheme = "Monokai Soda"
 config.bold_brightens_ansi_colors = true
 config.colors = {
-	background = "#000000",
+	background = "#0E1116",
 }
 
 ------------------------------------------------------------
@@ -92,6 +92,70 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action.SendKey({ key = " ", mods = "CTRL" }),
 	},
+	{
+		key = "N",
+		mods = "CTRL|SHIFT",
+		action = act.SendKey({ key = "N", mods = "CTRL|SHIFT" }),
+	},
+
+	-- New zoom in (CMD+SHIFT+= → CMD+SHIFT+)
+	{
+		key = "=",
+		mods = "CMD|SHIFT",
+		action = act.IncreaseFontSize,
+	},
+
+	-- New zoom out (CMD+SHIFT+-)
+	{
+		key = "-",
+		mods = "CMD|SHIFT",
+		action = act.DecreaseFontSize,
+	},
+	-- Disable default CMD+= zoom
+	{
+		key = "=",
+		mods = "CMD",
+		action = act.DisableDefaultAssignment,
+	},
+
+	-- split tmux window vertically
+	{
+		key = "\\",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = "\\" }), -- kill-window
+		}),
+	},
+	-- split tmux window vertically
+	{
+		key = "-",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = "-" }), -- kill-window
+		}),
+	},
+	-- split tmux window horizontally
+	{
+		key = "-",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = "-" }), -- kill-window
+		}),
+	},
+
+	-- split tmux window vertically
+	{
+		key = "\\",
+		mods = "CMD",
+		action = act.Multiple({
+			act.SendKey(tmux_prefix),
+			act.SendKey({ key = "\\" }), -- kill-window
+		}),
+	},
+
 	-- Close tmux pane/window
 	{
 		key = "w",

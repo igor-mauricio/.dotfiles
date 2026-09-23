@@ -17,3 +17,5 @@
     colorMoved = default
 [push]
 	autoSetupRemote = true
+[pull]
+	rebase = true

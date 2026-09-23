@@ -30,6 +30,25 @@
                     {
                         "manipulators": [
                             {
+                                "description": "Change esc to command+control+option+shift.",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "modifiers": ["left_command", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
                                 "description": "Change caps_lock to control",
                                 "from": {
                                     "key_code": "caps_lock",
