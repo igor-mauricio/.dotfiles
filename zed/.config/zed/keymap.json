@@ -1,0 +1,596 @@
+[
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "ctrl-d": ["vim::ScrollDown", "vim::ScrollCursorCenter"],
+      "ctrl-u": ["vim::ScrollUp", "vim::ScrollCursorCenter"],
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "ctrl-shift-d": "vim::PushDelete",
+      "ctrl-shift-x": "vim::DeleteRight",
+      "ctrl-shift-c": "vim::PushChange",
+      "ctrl-shift-cmd-c": "vim::ChangeToEndOfLine",
+      "x": ["workspace::SendKeystrokes", "\" _ ctrl-shift-x"],
+      "c l": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c l"],
+      "c c": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c c"],
+      "c e": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c e"],
+      "c i w": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i w"],
+      "c i (": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i ("],
+      "c i \"": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i \""],
+      "c i [": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i ["],
+      "c i {": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i {"],
+      "c i *": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i *"],
+      "c i `": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i `"],
+      "c i '": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c i '"],
+      "C": ["workspace::SendKeystrokes", "\" _ ctrl-shift-cmd-c"],
+    },
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "ctrl-shift-d": "vim::VisualDelete",
+      "ctrl-shift-x": "vim::VisualDelete",
+      "ctrl-shift-c": "vim::Substitute",
+      "x": ["workspace::SendKeystrokes", "\" _ ctrl-shift-x"],
+      "c": ["workspace::SendKeystrokes", "\" _ ctrl-shift-c"],
+    },
+  },
+  {
+    "context": "(Editor && vim_mode == normal) || (Workspace && !Editor && !Terminal)",
+    "bindings": {
+      "-": [
+        "task::Spawn",
+        {
+          "task_name": "Yazi(choose file)",
+        },
+      ],
+    },
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "s a": "vim::PushAddSurrounds",
+    },
+  },
+  {
+    "context": "vim_operator == y",
+    "unbind": {
+      "s": ["vim::PushAddSurrounds", {}],
+    },
+  },
+  {
+    "context": "vim_mode == visual",
+    "unbind": {
+      "s": "vim::Substitute",
+    },
+  },
+  {
+    "context": "(vim_mode == normal || vim_mode == helix_normal) && !menu",
+    "unbind": {
+      "s": "vim::Substitute",
+    },
+  },
+  {
+    "context": "(Editor && vim_mode == normal) || (Workspace && !Editor && !Terminal)",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "(vim_mode == helix_normal || vim_mode == helix_select) && !menu",
+    "unbind": {
+      "space f": "file_finder::Toggle",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-p": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-1": ["pane::ActivateItem", 0],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-1": ["pane::ActivateItem", 0],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-9": ["pane::ActivateItem", 8],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-9": ["pane::ActivateItem", 8],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-8": ["pane::ActivateItem", 7],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-8": ["pane::ActivateItem", 7],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-7": ["pane::ActivateItem", 6],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-7": ["pane::ActivateItem", 6],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-6": ["pane::ActivateItem", 5],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-6": ["pane::ActivateItem", 5],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-5": ["pane::ActivateItem", 4],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-5": ["pane::ActivateItem", 4],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-4": ["pane::ActivateItem", 3],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-4": ["pane::ActivateItem", 3],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-3": ["pane::ActivateItem", 2],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-3": ["pane::ActivateItem", 2],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-2": ["pane::ActivateItem", 1],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-2": ["pane::ActivateItem", 1],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-9": ["workspace::ActivatePane", 8],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-9": ["workspace::ActivatePane", 8],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-1": ["workspace::ActivatePane", 0],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-1": ["workspace::ActivatePane", 0],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-2": ["workspace::ActivatePane", 1],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-2": ["workspace::ActivatePane", 1],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-3": ["workspace::ActivatePane", 2],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-3": ["workspace::ActivatePane", 2],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-4": ["workspace::ActivatePane", 3],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-4": ["workspace::ActivatePane", 3],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-5": ["workspace::ActivatePane", 4],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-5": ["workspace::ActivatePane", 4],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-6": ["workspace::ActivatePane", 5],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-6": ["workspace::ActivatePane", 5],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-7": ["workspace::ActivatePane", 6],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-7": ["workspace::ActivatePane", 6],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-8": ["workspace::ActivatePane", 7],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-8": ["workspace::ActivatePane", 7],
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "] e": [
+        "editor::GoToDiagnostic",
+        {
+          "severity": {
+            "min": "hint",
+            "max": "error",
+          },
+        },
+      ],
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "f8": [
+        "editor::GoToDiagnostic",
+        {
+          "severity": {
+            "min": "hint",
+            "max": "error",
+          },
+        },
+      ],
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "[ e": [
+        "editor::GoToPreviousDiagnostic",
+        {
+          "severity": {
+            "min": "hint",
+            "max": "error",
+          },
+        },
+      ],
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "shift-f8": [
+        "editor::GoToPreviousDiagnostic",
+        {
+          "severity": {
+            "min": "hint",
+            "max": "error",
+          },
+        },
+      ],
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-`": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-`": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "(Editor && vim_mode == normal) || (Workspace && !Editor && !Terminal)",
+    "bindings": {
+      "space /": "pane::DeploySearch",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-shift-f": "pane::DeploySearch",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-shift-n": "editor::SelectDown",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-alt-shift-n": "editor::MoveDown",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-n": "editor::MoveDown",
+    },
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual || vim_mode == operator",
+    "unbind": {
+      "] e": "editor::MoveLineDown",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "d": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "cmd-backspace": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": true,
+        },
+      ],
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "unbind": {
+      "%": "project_panel::NewFile",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "r": "project_panel::Rename",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "enter": "project_panel::Rename",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "enter": "project_panel::Open",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "unbind": {
+      "p": "project_panel::Open",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "u": "project_panel::Undo",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "cmd-z": "project_panel::Undo",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-z": "project_panel::Undo",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "y": "project_panel::Copy",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "shift-a": "project_panel::NewDirectory",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "alt-cmd-n": "project_panel::NewDirectory",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "p": "project_panel::Paste",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "x": "project_panel::Cut",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "o": "project_panel::RevealInFileManager",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "alt-cmd-r": "project_panel::RevealInFileManager",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "[ e": "project_panel::SelectPrevDiagnostic",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "unbind": {
+      "[ d": "project_panel::SelectPrevDiagnostic",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "] e": "project_panel::SelectNextDiagnostic",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "unbind": {
+      "] d": "project_panel::SelectNextDiagnostic",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space": "menu::SelectNext",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "shift-down": "menu::SelectNext",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "shift-up": "editor::SelectUp",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "shift-up": "editor::SelectUp",
+    },
+  },
+  {
+    "context": "Editor && vim_mode==normal && extension == md",
+    "bindings": {
+      "space o v": "markdown::OpenPreviewToTheSide",
+    },
+  },
+  {
+    "context": "Editor && extension == md",
+    "unbind": {
+      "cmd-k v": "markdown::OpenPreviewToTheSide",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-t": "workspace::NewCenterTerminal",
+    },
+  },
+]

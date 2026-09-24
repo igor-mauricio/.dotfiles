@@ -1,0 +1,14 @@
+[
+  {
+    "label": "Yazi(choose file)",
+    "command": "yazi \"$(dirname \"$ZED_FILE\")\" --chooser-file /tmp/yazi-path-zed && [ -s /tmp/yazi-path-zed ] && zed -a \"$(cat /tmp/yazi-path-zed)\" && rm /tmp/yazi-path-zed",
+    "env": { "EDITOR": "zed" },
+    "shell": {
+      "program": "sh"
+    },
+    "hide": "always",
+    "use_new_terminal": true,
+    "reveal_target": "center",
+    "allow_concurrent_runs": false
+  }
+]
